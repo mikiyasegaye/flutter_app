@@ -38,7 +38,10 @@ class HomePage extends StatelessWidget {
               child: const Text('Go to About Page'),
               onPressed: () {
                 Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const AboutPage()),
+                  MaterialPageRoute(
+                      builder: (context) => const AboutPage(
+                            data: 'Data sent from Home Page',
+                          )),
                 );
               },
             )
@@ -50,15 +53,34 @@ class HomePage extends StatelessWidget {
 }
 
 class AboutPage extends StatelessWidget {
-  const AboutPage({Key? key}) : super(key: key);
+  final String data;
+  const AboutPage({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Flutter Demo About Page'),
       ),
-      body: const Center(
-        child: Text('About page!'),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            const Text('About Page'),
+            Text(
+              data,
+            ),
+            TextButton(
+              child: const Text('Go to Home Page'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        ),
       ),
     );
   }
