@@ -27,17 +27,38 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Flutter Demo Home Page'),
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'Hello, World!',
-                style: Theme.of(context).textTheme.headline4,
-              ),
-            ],
-          ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Center(
+              child: Text('Home Page'),
+            ),
+            TextButton(
+              child: const Text('Go to About Page'),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const AboutPage()),
+                );
+              },
+            )
+          ],
         ),
+      ),
+    );
+  }
+}
+
+class AboutPage extends StatelessWidget {
+  const AboutPage({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Flutter Demo About Page'),
+      ),
+      body: const Center(
+        child: Text('About page!'),
       ),
     );
   }
