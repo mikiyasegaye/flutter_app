@@ -1,3 +1,4 @@
+import 'package:flutter_app/route_generator.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -10,13 +11,21 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.purple[600],
       ),
-      home: const HomePage(),
+      home: const HomePage(
+        data: '',
+      ),
+      initialRoute: '/',
+      onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
 }
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final String data;
+  const HomePage({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -37,11 +46,9 @@ class HomePage extends StatelessWidget {
             TextButton(
               child: const Text('Go to About Page'),
               onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                      builder: (context) => const AboutPage(
-                            data: 'Data sent from Home Page',
-                          )),
+                Navigator.of(context).pushNamed(
+                  '/about',
+                  arguments: 'Hello from Home Page!',
                 );
               },
             )
